@@ -1,10 +1,9 @@
 const screen = document.querySelector(".screen");
-const test = document.querySelector(".test");
 let sizeinput = document.querySelector("#range").value;
 const wrapper = document.querySelector(".colorwrapper");
 const randombutton = document.querySelector(".random");
 const clear = document.querySelector(".clear");
-let colour = document.querySelector(".colorblock").value;
+let colour = document.querySelector(".colorblock");
 let randcolor = false;
 let enablepaint = false;
 //for clearing the screen
@@ -17,14 +16,28 @@ function clearscreen()
     }
 }
 //for enabling painting
-function enablepainting()
+function statuspainting()
 {
-    enablepaint = true;
-}
-//for diabling painting
-function disablepainting()
-{
-    enablepaint = false;
+    if(enablepaint == false)
+    {
+        enablepaint = true;
+        let screenbits = document.querySelectorAll(".screenbit");
+        for(let i = 0;i<screenbits.length;i++)
+        {
+            screenbits[i].addEventListener("mouseover",changecolor);
+        }
+        document.querySelector(".status").innerHTML = "Painting : ON";
+    }
+    else
+    {
+        let screenbits = document.querySelectorAll(".screenbit");
+        for(let i = 0;i<screenbits.length;i++)
+        {
+            screenbits[i].removeEventListener("mouseover",changecolor);
+        }
+        enablepaint = false;
+        document.querySelector(".status").innerHTML = "Painting : OFF";
+    }
 }
 //for enabling random color
 function randifclick()
@@ -46,12 +59,6 @@ function changescreensize()
     sizeinput = document.querySelector("#range").value;
     size(sizeinput);
     document.getElementById("sizetext").innerHTML = `${sizeinput} x ${sizeinput} <br>`;
-}
-//for changing the screen color
-function changescreencolor()
-{
-        colour = document.querySelector(".colorblock").value;
-        screen.style.backgroundColor = `${colour}`;
 }
 //for deleting and resetting the grid
 function resettinggrid()
@@ -87,12 +94,22 @@ function size(x)
         div.style.backgroundColor = "white";
         div.classList.add("screenbit");
         screen.appendChild(div);
-        div.addEventListener("mouseover",changecolor);
-        div.addEventListener("mousedown",enablepainting);
-        div.addEventListener("mouseup",disablepainting);
-
+        div.addEventListener("click",statuspainting);
+        div.addEventListener("click",changecolor);
     }
     screen.style.gridTemplateColumns = `repeat(${x},1fr)`;
 }
+//updating the color tag name
+function updatename()
+{
+    document.querySelector(".colorname").value = colour;
+}
+//updating the color circle
+function updatecolor()
+{
+    wrapper.style.backgroundColor = document.querySelector(".colorname").value;
+}
 //default size
 size(16);
+colour.addEventListener("change",updatename);
+document.querySelector(".colorname").addEventListener("change",updatecolor);
