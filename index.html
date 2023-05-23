@@ -7,17 +7,19 @@
     </head>
 
     <body>
+        <p class="status">Painting : OFF</p>
         <h1 id="title" style="text-align: center;">Welcome to <br> Etch-A-Sketch</h1>
         <div class="main">
             <div class="screen"></div>
             <div class="buttons">
-                <div class="rangeselector">
+                <div class="rangeselector" style="margin-left:10px;">
                     <span id="sizetext" style="font-size: x-large; font-family: Arial, Helvetica, sans-serif;">16 x 16 <br></span>
-                    <input type="range" id="range" value="16" min="8" max="48" onchange = "changescreensize()" style="margin: 0px;">
+                    <input type="range" id="range" value="16" min="8" max="48" onchange = "changescreensize()" style="margin: 0px; height: 25px;">
                 </div>
                 <div class="colorwrapper">
                     <input type="color" class="colorblock" onchange="normalcolor()"> 
                 </div>
+                <input type="text" class="colorname" value="#000000"></input>
                 <button class="random" onclick="randifclick()">Random</button>
                 <button class="clear" onclick = "clearscreen()">Clear</button>
             </div>
