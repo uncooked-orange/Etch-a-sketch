@@ -103,7 +103,6 @@ function size(x)
 function updatename()
 {
     document.querySelector(".colorname").value = colour.value;
-    document.querySelector("#title").innerHTML = `${colour.value}`;
 }
 //updating the color circle
 function updatecolor()
