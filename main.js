@@ -50,7 +50,7 @@ function normalcolor()
     randcolor = false
 
     //for changing the background of the color input
-    colour = document.querySelector(".colorblock").value;
+    let colour = document.querySelector(".colorblock").value;
     wrapper.style.backgroundColor = `${colour}`;
 }
 //for changing the screen size
@@ -70,7 +70,7 @@ function resettinggrid()
     }
 }
 //for changing the color of each bit
-//this is used in combination with (size()) to change each bits color
+//this is used in combination with (size()) to change each bits color and other functions aswell
 function changecolor()
 {
     if(enablepaint)
@@ -78,8 +78,8 @@ function changecolor()
         if(randcolor)
             this.style.backgroundColor = `hsl(${Math.floor(Math.random()*360)},100%,50%)`;
         else
-        { 
-            colour = document.querySelector(".colorblock").value;
+        {
+            let colour = document.querySelector(".colorblock").value;
             this.style.backgroundColor =  `${colour}`;
         }
     }  
@@ -102,14 +102,18 @@ function size(x)
 //updating the color tag name
 function updatename()
 {
-    document.querySelector(".colorname").value = colour;
+    document.querySelector(".colorname").value = colour.value;
+    document.querySelector("#title").innerHTML = `${colour.value}`;
 }
 //updating the color circle
 function updatecolor()
 {
+    document.querySelector("#title").innerHTML = `${document.querySelector(".colorname").value}`;
+    colour.value = document.querySelector(".colorname").value;
     wrapper.style.backgroundColor = document.querySelector(".colorname").value;
 }
 //default size
 size(16);
+
 colour.addEventListener("change",updatename);
 document.querySelector(".colorname").addEventListener("change",updatecolor);
