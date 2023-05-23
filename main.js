@@ -108,7 +108,6 @@ function updatename()
 //updating the color circle
 function updatecolor()
 {
-    document.querySelector("#title").innerHTML = `${document.querySelector(".colorname").value}`;
     colour.value = document.querySelector(".colorname").value;
     wrapper.style.backgroundColor = document.querySelector(".colorname").value;
 }
